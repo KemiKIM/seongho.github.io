@@ -6,19 +6,33 @@
   <meta http-equiv="Cache-Control" content="no-cache">
   <meta http-equiv="Expires" content="-1">
 
-  <script src="../../jquery-3.6.4.min.js"></script>
+  <link rel="stylesheet" href="../../common/style.css">
+  <script src="../../common/jquery-3.6.4.min.js"></script>
   <script src="index.js"></script>
 
-  <title>Flutter WebView Interaction  수정 2</title>
+  <title>사이트 제목 설정 부분</title>
 
 </head>
 <body>
-  <h1>Flutter WebView Interaction Example 수정 2</h1>
+  <h1></h1>
   
   <!-- Flutter로 메시지 전송 버튼 -->
-  <button onclick="sendMessageToFlutter()">Send Message to Flutter</button>
+  <!-- <button onclick="sendMessageToFlutter()">Send Message to Flutter</button> -->
 
   <!-- Flutter에서 받은 메시지를 표시할 영역 -->
-  <p id="flutterMessage">Message from Flutter will appear here</p>
+  <!-- <p id="flutterMessage">Message from Flutter will appear here</p> -->
+
+
+
+  <div class="container">
+    <!-- "Hello" 문구 추가 -->
+    <h1 class="header-text">Hello</h1>
+    
+    <!-- 텍스트 필드와 버튼 -->
+    <input type="text" id="myNumber" name="quantity" oninput="validateNumber(event)" pattern="[0-9]*" placeholder="숫자만 입력하세요">
+
+    <button class="bottom-button" onclick="location.href='../main/main.html'">다른 HTML로 이동</button>
+</div>
+
 </body>
 </html>

@@ -16,6 +16,12 @@ function validateNumber(event) {
   event.target.value = event.target.value.replace(/[^0-9]/g, '');
 }
 
+function moveMain() {
+  window.location.href = "https://kemikim.github.io/seongho.github.io/main/main.html"; 
+}
+
+
+
 
 // Flutter로 메시지 전송 함수
 function sendMessageToFlutter() {

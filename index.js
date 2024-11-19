@@ -1,6 +1,6 @@
 // Firebase SDK 모듈화 버전 사용
-import { initializeApp } from "https://www.gstatic.com/firebasejs/9.0.9/firebase-app.js";
-import { getDatabase, ref, onValue } from "https://www.gstatic.com/firebasejs/9.0.9/firebase-database.js";
+import { initializeApp } from "https://www.gstatic.com/firebasejs/11.0.2/firebase-app.js";
+import { getDatabase, ref, onValue } from "https://www.gstatic.com/firebasejs/11.0.2/firebase-database.js";
 
 
   // Your web app's Firebase configuration

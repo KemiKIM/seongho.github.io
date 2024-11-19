@@ -1,38 +1,48 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no" />
   <meta http-equiv="Cache-Control" content="no-cache">
   <meta http-equiv="Expires" content="-1">
 
-  <link rel="stylesheet" href="https://kemikim.github.io/seongho.github.io/common/style.css">
-  <script src="https://kemikim.github.io/seongho.github.io/common/jquery-3.6.4.min.js"></script>
-  <script src="index.js"></script>
+  <script src="jquery-3.6.4.min.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/11.0.2/firebase-app.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/11.0.2/firebase-database.js"></script>
+  <script type="module" src="index.js"></script>
 
-  <title>사이트 제목 설정 부분</title>
+  <link rel="stylesheet" href="style.css">
+
+  <title>Sample Layout</title>
 
 </head>
+
 <body>
-  <h1></h1>
+  <div class="header">
+    <button class="header-btn left-btn">_</button>
+    <span class="header-text">Header View</span>
+    <button class="header-btn right-btn">_</button>
+  </div>
+  <div class="search-bar">
+    <input type="text" id="searchInput" placeholder="Search...">
+  </div>
+  <div class="table-container">
+    <table id="dataTable">
+      <thead>
+        <tr>
+          <th>item1</th>
+          <th>item2</th>
+          <th>item3</th>
+          <th>item4</th>
+        </tr>
+      </thead>
+      <tbody>
+        <!-- Table rows will be dynamically added here -->
+      </tbody>
+    </table>
+  </div>
   
-  <!-- Flutter로 메시지 전송 버튼 -->
-  <!-- <button onclick="sendMessageToFlutter()">Send Message to Flutter</button> -->
-
-  <!-- Flutter에서 받은 메시지를 표시할 영역 -->
-  <!-- <p id="flutterMessage">Message from Flutter will appear here</p> -->
-
-
-
-  <div class="container">
-    <!-- "Hello" 문구 추가 -->
-    <h1 class="header-text">Hello</h1>
-    
-    <!-- 텍스트 필드와 버튼 -->
-    <input type="text" id="myNumber" name="quantity" oninput="validateNumber(event)" pattern="[0-9]*" placeholder="숫자만 입력하세요">
-
-    <button class="bottom-button" onclick="moveMain()">다른 HTML로 이동</button>
-</div>
-
 </body>
+
 </html>

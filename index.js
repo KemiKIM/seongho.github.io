@@ -1,50 +1,89 @@
-// 버튼에서 롱탭 비활성화
-function disableLongTap(event) {
-  event.preventDefault();  // 기본 동작(롱탭 메뉴 등) 방지
-}
+// Firebase SDK 모듈화 버전 사용
+import { initializeApp } from "https://www.gstatic.com/firebasejs/11.0.2/firebase-app.js";
+import { getDatabase, ref, onValue } from "https://www.gstatic.com/firebasejs/11.0.2/firebase-database.js";
 
-// 실행
-document.addEventListener('DOMContentLoaded', () => {
-  const button = document.querySelector('button');
 
+  // Your web app's Firebase configuration
+  const firebaseConfig = {
+    apiKey: "AIzaSyAzf-PtTwYpkTLbad_XQEhLyIrth_N-i5M",
+    authDomain: "manageitem.firebaseapp.com",
+    databaseURL: "https://manageitem-default-rtdb.asia-southeast1.firebasedatabase.app",
+    projectId: "manageitem",
+    storageBucket: "manageitem.firebasestorage.app",
+    messagingSenderId: "892109334421",
+    appId: "1:892109334421:web:459aa4e031ae18a4b9b89c"
+  };
+
+  // Firebase 초기화
+const app = initializeApp(firebaseConfig);
+const database = getDatabase(app);
+
+// 테이블 body 요소 선택
+// Firebase에서 데이터를 불러온 후 검색 기능을 구현한 코드
+// 여기서 수정 중...
+
+
+// Firebase에서 데이터를 불러온 후 검색 기능
+const tableBody = document.querySelector('#dataTable tbody');
+
+// Firebase에서 'allitems' 경로의 데이터를 읽어오기
+const usersRef = ref(database, 'allitems');
+onValue(usersRef, (snapshot) => {
+  const data = snapshot.val();
+  tableBody.innerHTML = ''; // 기존 테이블 초기화
+
+  const tableData = []; // 데이터를 저장할 배열
+
+  // 테이블에 데이터를 추가하고 배열에 저장
+  if (data) {
+    for (let userId in data) {
+      const user = data[userId];
+      const row = document.createElement('tr');
+      row.innerHTML = `
+        <td>${user.name}</td>
+        <td>${user.partName}</td>
+        <td>${user.partNumber}</td>
+        <td>${user.location}</td>
+      `;
+      tableBody.appendChild(row);
+      tableData.push(user); // 데이터 저장
+    }
+  }
+
+  // 검색 기능
+  const searchInput = document.getElementById('searchInput');
+  searchInput.addEventListener('input', (e) => {
+    const query = e.target.value.trim().toLowerCase(); // 검색어 처리
+    tableBody.innerHTML = ''; // 테이블 초기화
+
+    // 검색어가 있으면 필터링된 데이터만 표시
+    if (query) {
+      tableData.forEach((user) => {
+        // 모든 필드(name, partName, partNumber, location)를 하나로 합쳐서 검색
+        const combinedText = `${user.name} ${user.partName} ${user.partNumber} ${user.location}`.toLowerCase();
+        if (combinedText.includes(query)) {
+          const row = document.createElement('tr');
+          row.innerHTML = `
+            <td>${user.name}</td>
+            <td>${user.partName}</td>
+            <td>${user.partNumber}</td>
+            <td>${user.location}</td>
+          `;
+          tableBody.appendChild(row);
+        }
+      });
+    } else {
+      // 검색어가 없을 경우 전체 데이터를 표시
+      tableData.forEach((user) => {
+        const row = document.createElement('tr');
+        row.innerHTML = `
+          <td>${user.name}</td>
+          <td>${user.partName}</td>
+          <td>${user.partNumber}</td>
+          <td>${user.location}</td>
+        `;
+        tableBody.appendChild(row);
+      });
+    }
+  });
 });
-
-
-
-function validateNumber(event) {
-  // 입력된 값에서 숫자만 남기고 나머지 문자 제거
-  event.target.value = event.target.value.replace(/[^0-9]/g, '');
-}
-
-function moveMain() {
-  window.location.href = "https://kemikim.github.io/seongho.github.io/main/main.html"; 
-}
-
-
-
-
-// Flutter로 메시지 전송 함수
-function sendMessageToFlutter() {
-  // Flutter로 메시지를 보내는 코드 (JavaScriptChannel을 통해)
-
-  if (window.flutter) {
-    window.flutter.postMessage("Hello AOS JS!");
-  } else {
-    console.log("????");
-  }
-
-
-  if (window.webkit && window.webkit.messageHandlers && window.webkit.messageHandlers.FlutterChannel) {
-    // FlutterChannel을 통해 메시지를 Flutter로 전송
-    window.webkit.messageHandlers.FlutterChannel.postMessage("Hello from JavaScript!");
-  } else {
-    console.log("Flutter WebView bridge not found.");
-  }
-}
-  
-  // Flutter에서 메시지 받기
-  function receiveMessageFromFlutter(message) {
-    document.getElementById("flutterMessage").innerText = message;
-  }
-
-  

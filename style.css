@@ -3,135 +3,31 @@
     src: url('/AppleSDGothicNeoUL.ttf') format('truetype');
   }
 
-
-body {
-    font-family: 'AppleFont', sans-serif; /* body에 적용 */
-    background-color: #E5E5EA;
-    margin: 0;
+  body {
     font-family: Arial, sans-serif;
-}
-
-
-
-/* 상단 뷰: */
-.header {
-    background-color: white;
-    text-align: center;
-    line-height: 60px;
-    height: 60px;
-}
-
-/* 버튼 공통 스타일 */
-.header-btn {
-    position: absolute;
-    top: 0;
-    height: 60px;
-    background-color: transparent;
-    color: #ffb6c1;
-    border: none;
-    font-size: 16px;
-    cursor: pointer;
-    padding: 0 15px;
-}
-
-/* Hedaer Text */
-.header-text {
-    color: black; 
-}
-
-/* 왼쪽 버튼 */
-.left-btn {
-    left: 0;
-}
-
-/* 오른쪽 버튼 */
-.right-btn {
-    right: 0;
-}
-
-
-
-
-
-
-
-
-/* Search Bar */
-.search-bar {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    height: 60px;
-    background-color: #ffffff;
-    border-bottom: 1px solid #ddd;
-}
-
-.search-bar input {
-    background-color: #E5E5EA;
-    width: 90%;
-    padding: 8px;
-    font-size: 16px;
-    border: 2px solid rgb(255, 255, 255);
-    /* 테두리 색상 빨간색 */
-    border-radius: 10px;
-    /* 모서리 둥글게 설정 */
-    outline: none;
-    /* 클릭 시 기본 파란 테두리 제거 */
-}
-
-
-
-
-
-
-/* table View */
-.table-container {
-    height: calc(100vh - 120px);
-    /* 전체 높이에서 상단 120px 제외 */
-    overflow-x: hidden; /* 가로 스크롤 비활성화 */
-    overflow-y: auto; /* 세로 스크롤 활성화 */
-}
-
-table {
+    margin: 20px;
+  }
+  table {
     width: 100%;
     border-collapse: collapse;
-    table-layout: fixed; /* 열 너비를 일정하게 고정 */
-}
-
-/* 헤더 고정 */
-thead {
-    position: sticky;
-    top: 0;
-    background-color: #E5E5EA;
-    z-index: 1; /* 헤더가 다른 내용 위에 표시되도록 설정 */
+    margin-bottom: 20px;
   }
-
-/* 테이블 헤더 텍스트 색상 변경 */
-thead th {
-    color: black; /* 텍스트 색상을 빨간색으로 변경 */
-  }
-
-th,
-td {
-    padding: 10px;
+  th, td {
+    border: 1px solid #ccc;
+    padding: 8px;
     text-align: center;
-    /* border: 1px solid black; */
-    border-bottom: 1px solid rgb(220, 214, 214);
-}
-
-
-/* 두 번째 열 (item2) */
-td:nth-child(2) {
-    background-color: white;
-}
-
-/* 네 번째 열 (item4) */
-td:nth-child(4) {
-    background-color: white;
-}
-
-
-th {
-    background-color: #E5E5EA;
+  }
+  th {
+    background-color: #f4f4f4;
+  }
+  #addRowButton {
+    background-color: #28a745;
     color: white;
-}
+    padding: 10px 20px;
+    border: none;
+    cursor: pointer;
+    border-radius: 4px;
+  }
+  #addRowButton:hover {
+    background-color: #218838;
+  }

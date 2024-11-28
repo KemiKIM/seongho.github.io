@@ -1,25 +1,55 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no" />
   <meta http-equiv="Cache-Control" content="no-cache">
   <meta http-equiv="Expires" content="-1">
-  <script src="assets/Review/jquery-3.6.4.min.js"></script>
-  <script type="module" src="assets/Review/index.js"></script>
-  <link rel="stylesheet" href="assets/Review/style.css">
-  <title>Dynamic Table</title>
-</head>
 
+  <script src="jquery-3.6.4.min.js"></script>
+  <script type="module" src="index.js"></script>
+
+  <link rel="stylesheet" href="style.css">
+  <title>Dynamic Table</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 20px;
+    }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-bottom: 20px;
+    }
+    th, td {
+      border: 1px solid #ccc;
+      padding: 8px;
+      text-align: center;
+    }
+    th {
+      background-color: #f4f4f4;
+    }
+    #addRowButton {
+      background-color: #28a745;
+      color: white;
+      padding: 10px 20px;
+      border: none;
+      cursor: pointer;
+      border-radius: 4px;
+    }
+    #addRowButton:hover {
+      background-color: #218838;
+    }
+  </style>
+</head>
 <body>
-  <h1>자재 관리</h1>
+  <h1>Dynamic Table</h1>
   <table id="dynamicTable">
     <thead>
       <tr>
-        <th>이름</th>
-        <th>상세</th>
-        <th>위치</th>
+        <th>1번</th>
+        <th>2번</th>
+        <th>3번</th>
       </tr>
     </thead>
     <tbody>
@@ -27,6 +57,7 @@
     </tbody>
   </table>
   <button id="addRowButton">+</button>
-</body>
 
+  <script src="script.js"></script>
+</body>
 </html>

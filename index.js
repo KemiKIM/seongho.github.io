@@ -115,17 +115,3 @@ addRowButton.addEventListener("click", openInputModal);
 
 // Load the table data on page load
 loadFromStorage();
-
-
-document.getElementById("addRowButton").addEventListener("click", function () {
-  const table = document.getElementById("dynamicTable").getElementsByTagName('tbody')[0];
-  const newRow = table.insertRow();
-  
-  const nameCell = newRow.insertCell(0);
-  const detailCell = newRow.insertCell(1);
-  const locationCell = newRow.insertCell(2);
-  
-  nameCell.textContent = "새 항목";
-  detailCell.textContent = "상세 내용";
-  locationCell.textContent = "위치 정보";
-});

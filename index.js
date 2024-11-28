@@ -1,19 +1,51 @@
-// Select the table body and addRowButton
 const tableBody = document.querySelector("#dynamicTable tbody");
 const addRowButton = document.querySelector("#addRowButton");
 
-// Function to render a row
-function renderRow(rowData) {
+// 행을 렌더링하는 함수
+function renderRow(rowData, rowIndex) {
   const row = document.createElement("tr");
+
   rowData.forEach((cellData) => {
     const cell = document.createElement("td");
     cell.textContent = cellData;
     row.appendChild(cell);
   });
+
+  // 삭제 버튼 추가
+  const deleteCell = document.createElement("td");
+  const deleteButton = document.createElement("button");
+  deleteButton.textContent = "삭제";
+  deleteButton.onclick = () => deleteRow(rowIndex); // 삭제 함수 호출
+  deleteCell.appendChild(deleteButton);
+  row.appendChild(deleteCell);
+
   tableBody.appendChild(row);
 }
 
-// Function to open a modal for row input
+// 삭제 버튼 클릭 시 호출되는 함수
+function deleteRow(rowIndex) {
+  // 로컬 스토리지에서 해당 행 삭제
+  const existingData = JSON.parse(localStorage.getItem("tableData")) || [];
+  existingData.splice(rowIndex, 1); // 해당 행을 배열에서 제거
+  localStorage.setItem("tableData", JSON.stringify(existingData));
+
+  // 테이블에서 해당 행 삭제
+  const rows = tableBody.getElementsByTagName("tr");
+  rows[rowIndex].remove();
+}
+
+// 행 추가 버튼 이벤트 리스너
+addRowButton.addEventListener("click", openInputModal);
+
+// 로컬 스토리지에서 데이터를 로드하고 테이블을 렌더링
+function loadFromStorage() {
+  const storedData = JSON.parse(localStorage.getItem("tableData")) || [];
+  storedData.forEach((rowData, index) => renderRow(rowData, index));
+}
+
+loadFromStorage(); // 페이지 로드 시 데이터 불러오기
+
+// 입력 모달을 여는 함수 (이 부분은 삭제와 관련된 기능은 아님)
 function openInputModal() {
   const modalHtml = `
     <div id="inputModal" style="
@@ -70,18 +102,18 @@ function openInputModal() {
 
   document.body.insertAdjacentHTML("beforeend", modalHtml);
 
-  // Add event listeners for buttons
+  // 버튼 이벤트 리스너 추가
   document.getElementById("cancelButton").addEventListener("click", closeInputModal);
   document.getElementById("inputForm").addEventListener("submit", handleSubmit);
 }
 
-// Function to close the modal
+// 모달 닫는 함수
 function closeInputModal() {
   document.getElementById("inputModal").remove();
   document.getElementById("modalBackdrop").remove();
 }
 
-// Function to handle form submission
+// 폼 제출 시 데이터 처리
 function handleSubmit(event) {
   event.preventDefault();
 
@@ -91,27 +123,15 @@ function handleSubmit(event) {
 
   if (data1 && data2 && data3) {
     const newRow = [data1, data2, data3];
-    saveToStorage(newRow); // Save to LocalStorage
-    renderRow(newRow); // Render the new row
-    closeInputModal(); // Close the modal
+    saveToStorage(newRow); // 로컬 스토리지에 저장
+    renderRow(newRow); // 테이블에 행 추가
+    closeInputModal(); // 모달 닫기
   }
 }
 
-// Save data to LocalStorage
+// 데이터 로컬 스토리지에 저장하는 함수
 function saveToStorage(rowData) {
   const existingData = JSON.parse(localStorage.getItem("tableData")) || [];
   existingData.push(rowData);
   localStorage.setItem("tableData", JSON.stringify(existingData));
 }
-
-// Load data from LocalStorage and render the table
-function loadFromStorage() {
-  const storedData = JSON.parse(localStorage.getItem("tableData")) || [];
-  storedData.forEach(renderRow);
-}
-
-// Add event listener to the + button
-addRowButton.addEventListener("click", openInputModal);
-
-// Load the table data on page load
-loadFromStorage();

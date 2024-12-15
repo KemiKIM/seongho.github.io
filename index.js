@@ -60,13 +60,13 @@ function openInputModal() {
       border-radius: 8px;
       width: 300px;
     ">
-      <h3>Enter Row Data</h3>
+      <h3>내용을 입력하세요</h3>
       <form id="inputForm">
-        <label for="data1">1번:</label>
+        <label for="data1">이름:</label>
         <input type="text" id="data1" required style="width: 100%; margin-bottom: 10px;">
-        <label for="data2">2번:</label>
+        <label for="data2">상세:</label>
         <input type="text" id="data2" required style="width: 100%; margin-bottom: 10px;">
-        <label for="data3">3번:</label>
+        <label for="data3">위치:</label>
         <input type="text" id="data3" required style="width: 100%; margin-bottom: 10px;">
         <div style="text-align: right;">
           <button type="button" id="cancelButton" style="
@@ -77,7 +77,7 @@ function openInputModal() {
             cursor: pointer; 
             border-radius: 4px;
             margin-right: 10px;
-          ">Cancel</button>
+          ">취소</button>
           <button type="submit" style="
             background-color: #28a745; 
             color: white; 
@@ -85,7 +85,7 @@ function openInputModal() {
             border: none; 
             cursor: pointer; 
             border-radius: 4px;
-          ">Submit</button>
+          ">등록</button>
         </div>
       </form>
     </div>

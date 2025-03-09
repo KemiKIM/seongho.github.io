@@ -28,18 +28,17 @@ function renderRow(rowData, rowIndex) {
 // 삭제 버튼 클릭 시 호출되는 함수
 function deleteRow(rowIndex) {
   let existingData = JSON.parse(localStorage.getItem("tableData")) || [];
-  
-  // 배열에서 해당 인덱스 삭제
+
+  // 기존 데이터에서 삭제
   existingData.splice(rowIndex, 1);
-  
-  // 변경된 데이터 다시 저장
+
+  // 변경된 데이터를 다시 로컬 스토리지에 저장
   localStorage.setItem("tableData", JSON.stringify(existingData));
 
   // 테이블을 다시 렌더링
   refreshTable();
 }
 
-// 테이블을 다시 렌더링하는 함수
 function refreshTable() {
   tableBody.innerHTML = ""; // 기존 행 제거
   const storedData = JSON.parse(localStorage.getItem("tableData")) || [];

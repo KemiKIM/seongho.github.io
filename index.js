@@ -17,7 +17,8 @@ function renderRow(rowData, rowIndex) {
   deleteButton.textContent = "삭제";
 
   // 삭제 이벤트: 현재 행의 인덱스를 다시 계산하여 전달
-  deleteButton.addEventListener("click", () => deleteRow(rowIndex));
+  // deleteButton.addEventListener("click", () => deleteRow(rowIndex));
+  deleteButton.onclick = () => deleteRow(row);
 
   deleteCell.appendChild(deleteButton);
   row.appendChild(deleteCell);
@@ -26,20 +27,22 @@ function renderRow(rowData, rowIndex) {
 }
 
 // 삭제 버튼 클릭 시 호출되는 함수
-function deleteRow(rowIndex) {
+function deleteRow(targetRow) {
   let existingData = JSON.parse(localStorage.getItem("tableData")) || [];
 
-  // 기존 데이터에서 삭제
-  existingData.splice(rowIndex, 1);
+  // 삭제할 행의 내용을 가져오기
+  const rowData = Array.from(targetRow.children).slice(0, 3).map(cell => cell.textContent);
+
+  // 기존 데이터에서 일치하는 항목 찾아 삭제
+  existingData = existingData.filter(row => JSON.stringify(row) !== JSON.stringify(rowData));
 
   // 변경된 데이터를 다시 로컬 스토리지에 저장
   localStorage.setItem("tableData", JSON.stringify(existingData));
 
-  // 테이블을 다시 렌더링
-  refreshTable();
-
+  // 페이지 새로고침
   location.reload();
 }
+
 
 function refreshTable() {
   tableBody.innerHTML = ""; // 기존 행 제거

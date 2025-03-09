@@ -29,14 +29,14 @@ function renderRow(rowData, rowIndex) {
 function deleteRow(rowIndex) {
   let existingData = JSON.parse(localStorage.getItem("tableData")) || [];
 
-  // 기존 데이터에서 삭제
+  // 기존 데이터에서 해당 행 제거
   existingData.splice(rowIndex, 1);
 
   // 변경된 데이터를 다시 로컬 스토리지에 저장
   localStorage.setItem("tableData", JSON.stringify(existingData));
 
-  // 테이블을 다시 렌더링
-  refreshTable();
+  // 페이지 새로고침
+  location.reload(); 
 }
 
 function refreshTable() {

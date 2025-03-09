@@ -15,7 +15,10 @@ function renderRow(rowData, rowIndex) {
   const deleteCell = document.createElement("td");
   const deleteButton = document.createElement("button");
   deleteButton.textContent = "삭제";
-  deleteButton.onclick = () => deleteRow(rowIndex); // 삭제 함수 호출
+
+  // 삭제 이벤트: 현재 행의 인덱스를 다시 계산하여 전달
+  deleteButton.addEventListener("click", () => deleteRow(rowIndex));
+
   deleteCell.appendChild(deleteButton);
   row.appendChild(deleteCell);
 
@@ -24,14 +27,23 @@ function renderRow(rowData, rowIndex) {
 
 // 삭제 버튼 클릭 시 호출되는 함수
 function deleteRow(rowIndex) {
-  // 로컬 스토리지에서 해당 행 삭제
-  const existingData = JSON.parse(localStorage.getItem("tableData")) || [];
-  existingData.splice(rowIndex, 1); // 해당 행을 배열에서 제거
+  let existingData = JSON.parse(localStorage.getItem("tableData")) || [];
+  
+  // 배열에서 해당 인덱스 삭제
+  existingData.splice(rowIndex, 1);
+  
+  // 변경된 데이터 다시 저장
   localStorage.setItem("tableData", JSON.stringify(existingData));
 
-  // 테이블에서 해당 행 삭제
-  const rows = tableBody.getElementsByTagName("tr");
-  rows[rowIndex].remove();
+  // 테이블을 다시 렌더링
+  refreshTable();
+}
+
+// 테이블을 다시 렌더링하는 함수
+function refreshTable() {
+  tableBody.innerHTML = ""; // 기존 행 제거
+  const storedData = JSON.parse(localStorage.getItem("tableData")) || [];
+  storedData.forEach((rowData, index) => renderRow(rowData, index));
 }
 
 // 행 추가 버튼 이벤트 리스너
